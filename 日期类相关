@@ -1,5 +1,5 @@
 	        //增加预售日期
 					Calendar ca = Calendar.getInstance();
-					ca.setTime(new Date()); 
+					ca.setTime(new Date()); //当前时间
 					ca.add(Calendar.MONTH, +4);//增加4个月
 					Date saleDate = ca.getTime();//返回表示该日历时间值的日期对象（来自历元的毫秒偏移量）
