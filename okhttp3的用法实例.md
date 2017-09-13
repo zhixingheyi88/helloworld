@@ -22,7 +22,7 @@ public static void main(String[] args) {
     
 		String url="https://www.baidu.com";
 		OkHttpClient okhttpClient=new OkHttpClient();
-		
+	///////////////////////////////////////////////////////////////////////////////	
 	/*	Get请求
 	 * Request request=new Request.Builder()
 				.url(url)
@@ -35,7 +35,7 @@ public static void main(String[] args) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
-		
+		///////////////////////////////////////////////////////////////////////////////////////////
 		/*//Post请求
 		RequestBody body=new FormBody.Builder()
 				.add("test", "test")
@@ -53,7 +53,8 @@ public static void main(String[] args) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
-		
+		////////////////////////////////////////////////////////////////////////
+		//下面是已文件的形式进行请求传递
 		File file=new File("");
 		RequestBody requestBody = new MultipartBody.Builder()
 			    .setType(MultipartBody.FORM)			    			    
