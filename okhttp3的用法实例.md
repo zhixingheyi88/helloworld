@@ -74,3 +74,45 @@ public static void main(String[] args) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+【3】下面是请求文件下载的servlet中的代码
+public class UserfilesDownloadServlet extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
+	private Logger logger = LoggerFactory.getLogger(getClass());
+
+	public void fileOutputStream(HttpServletRequest req, HttpServletResponse resp) 
+			throws ServletException, IOException {
+		String filepath = req.getRequestURI();	
+		String url=Global.getConfig("appRequestProject")+filepath;
+		System.out.println("url:::::::::"+url);
+		OkHttpClient okhttpClient=new OkHttpClient();
+		// 创建表单构建器  
+	       FormBody.Builder builder = new FormBody.Builder();  
+	      // 创建请求体，通过构建器请求体  
+	      RequestBody body = builder.build();  
+	      Request request = new Request.Builder().url(url).post(body).build();  
+		
+		try {
+			 Response response = okhttpClient.newCall(request).execute();  
+			FileCopyUtils.copy(response.body().byteStream(), resp.getOutputStream());
+			resp.setHeader("Content-Type", "application/octet-stream");
+			return;
+		} catch (Exception e) {
+			/*req.setAttribute("exception", new FileNotFoundException("请求的文件不存在"));
+			req.getRequestDispatcher("/WEB-INF/views/error/404.jsp").forward(req, resp);*/
+			resp.getWriter().append("无法加载文件");
+		}
+	}
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		fileOutputStream(req, resp);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		fileOutputStream(req, resp);
+	}
+
